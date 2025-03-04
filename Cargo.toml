@@ -1,0 +1,19 @@
+[package]
+name = "physical_units"
+version = "0.1.0"
+edition = "2021" # eller 2024 om du vill använda preview
+
+[dependencies]
+num-complex = "0.4"
+
+[[bin]]
+name = "physical_units"
+path = "src/main.rs"
+
+[lib]
+name = "physical_units"
+path = "src/lib.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
