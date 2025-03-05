@@ -1,19 +1,897 @@
-# Enheter för ValueWithUnits-systemet
-- unit: meter
-  # Basenhet för längd i SI-systemet
+# Enhetsregister för ValueWithUnits-systemet
+# Detta register definierar de fysikaliska enheter och storheter som används
+# i systemet, med stöd för dimensionsanalys och enhetskonvertering.
+
+# SI-GRUNDENHETER
+# Dessa representerar de fundamentala fysikaliska dimensionerna i systemet
+# och har ingen symbol eller konverteringsfaktor eftersom de är abstrakta dimensioner.
+- unit: length
   dimension: [1, 0, 0, 0, 0, 0, 0, 0]
-  symbol: \\mathrm{m}
-  factor: 1
+  # Längd - basdimension (m)
 
-# Konstanter
+- unit: time
+  dimension: [0, 1, 0, 0, 0, 0, 0, 0]
+  # Tid - basdimension (s)
+
+- unit: mass
+  dimension: [0, 0, 1, 0, 0, 0, 0, 0]
+  # Massa - basdimension (kg)
+
+- unit: current
+  dimension: [0, 0, 0, 1, 0, 0, 0, 0]
+  # Elektrisk ström - basdimension (A)
+
+- unit: temperature
+  dimension: [0, 0, 0, 0, 1, 0, 0, 0]
+  # Temperatur - basdimension (K)
+
+- unit: substance
+  dimension: [0, 0, 0, 0, 0, 1, 0, 0]
+  # Substansmängd - basdimension (mol)
+
+- unit: luminosity
+  dimension: [0, 0, 0, 0, 0, 0, 1, 0]
+  # Ljusstyrka - basdimension (cd)
+
+# ENHETER MED SYMBOLER OCH KONVERTERINGSFAKTORER
+# Längdenheter
+- unit: m
+  dimension: [1, 0, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{m}
+  factor: 1.0
+  # Meter - SI-grundenhet för längd
+
+- unit: cm
+  dimension: [1, 0, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{cm}
+  factor: 0.01
+  # Centimeter - 1/100 meter
+
+- unit: mm
+  dimension: [1, 0, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{mm}
+  factor: 0.001
+  # Millimeter - 1/1000 meter
+
+- unit: km
+  dimension: [1, 0, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{km}
+  factor: 1000.0
+  # Kilometer - 1000 meter
+
+- unit: mil
+  dimension: [1, 0, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{mil}
+  factor: 10000.0
+  # Svensk mil - 10 km eller 10000 meter
+
+# Tidsenheter
+- unit: s
+  dimension: [0, 1, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{s}
+  factor: 1.0
+  # Sekund - SI-grundenhet för tid
+
+- unit: min
+  dimension: [0, 1, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{min}
+  factor: 60.0
+  # Minut - 60 sekunder
+
+- unit: hour
+  dimension: [0, 1, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{h}
+  factor: 3600.0
+  # Timme - 3600 sekunder
+
+- unit: day
+  dimension: [0, 1, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{d}
+  factor: 86400.0
+  # Dygn - 86400 sekunder (24 timmar)
+
+- unit: year
+  dimension: [0, 1, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{år}
+  factor: 31536000.0
+  # År - 365 dagar eller 31536000 sekunder
+
+# Massenheter
+- unit: kg
+  dimension: [0, 0, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{kg}
+  factor: 1.0
+  # Kilogram - SI-grundenhet för massa
+
+- unit: g
+  dimension: [0, 0, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{g}
+  factor: 0.001
+  # Gram - 1/1000 kilogram
+
+- unit: mg
+  dimension: [0, 0, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{mg}
+  factor: 0.000001
+  # Milligram - 1/1000000 kilogram
+
+- unit: tonne
+  dimension: [0, 0, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{t}
+  factor: 1000.0
+  # Ton - 1000 kilogram
+
+# Andra grundenheter med symboler
+- unit: A
+  dimension: [0, 0, 0, 1, 0, 0, 0, 0]
+  symbol: \mathrm{A}
+  factor: 1.0
+  # Ampere - SI-grundenhet för elektrisk ström
+
+- unit: K
+  dimension: [0, 0, 0, 0, 1, 0, 0, 0]
+  symbol: \mathrm{K}
+  factor: 1.0
+  # Kelvin - SI-grundenhet för temperatur
+
+- unit: mol
+  dimension: [0, 0, 0, 0, 0, 1, 0, 0]
+  symbol: \mathrm{mol}
+  factor: 1.0
+  # Mol - SI-grundenhet för substansmängd
+
+- unit: cd
+  dimension: [0, 0, 0, 0, 0, 0, 1, 0]
+  symbol: \mathrm{cd}
+  factor: 1.0
+  # Candela - SI-grundenhet för ljusstyrka
+
+# SAMMANSATTA SI-ENHETER
+# Dessa är dimensionella storheter utan specifika symboler eller konverteringsfaktorer
+# Area
+- unit: area
+  dimension: [2, 0, 0, 0, 0, 0, 0, 0]
+  # Area - längd^2 (m²)
+
+# Volym
+- unit: volume
+  dimension: [3, 0, 0, 0, 0, 0, 0, 0]
+  # Volym - längd^3 (m³)
+
+# Hastighet
+- unit: velocity
+  dimension: [1, -1, 0, 0, 0, 0, 0, 0]
+  # Hastighet - längd/tid (m/s)
+
+# Acceleration
+- unit: acceleration
+  dimension: [1, -2, 0, 0, 0, 0, 0, 0]
+  # Acceleration - längd/tid² (m/s²)
+
+# Frekvens
+- unit: frequency
+  dimension: [0, -1, 0, 0, 0, 0, 0, 0]
+  # Frekvens - 1/tid (Hz)
+
+# Kraft
+- unit: force
+  dimension: [1, -2, 1, 0, 0, 0, 0, 0]
+  # Kraft - massa·längd/tid² (N)
+
+# Tryck
+- unit: pressure
+  dimension: [-1, -2, 1, 0, 0, 0, 0, 0]
+  # Tryck - kraft/area (Pa)
+
+# Energi
+- unit: energy
+  dimension: [2, -2, 1, 0, 0, 0, 0, 0]
+  # Energi - kraft·längd (J)
+
+# Vridmoment (ortogonal till energi)
+- unit: torque
+  dimension: [2, -2, 1, 0, 0, 0, 0, 1]
+  # Vridmoment - kraft·längd med ortogonalitet (N·m)
+
+# Effekt
+- unit: power
+  dimension: [2, -3, 1, 0, 0, 0, 0, 0]
+  # Effekt - energi/tid (W)
+
+# Reaktiv effekt (ortogonal till aktiv effekt)
+- unit: reactive_power
+  dimension: [2, -3, 1, 0, 0, 0, 0, 0]
+  # Reaktiv effekt - komplex effekt (VAr)
+
+# Elektrisk laddning
+- unit: charge
+  dimension: [0, 1, 0, 1, 0, 0, 0, 0]
+  # Elektrisk laddning - ström·tid (C)
+
+# Elektrisk spänning
+- unit: voltage
+  dimension: [2, -3, 1, -1, 0, 0, 0, 0]
+  # Elektrisk spänning - effekt/ström (V)
+
+# Elektrisk kapacitans
+- unit: capacitance
+  dimension: [-2, 4, -1, 2, 0, 0, 0, 0]
+  # Elektrisk kapacitans - laddning/spänning (F)
+
+# Elektriskt motstånd
+- unit: resistance
+  dimension: [2, -3, 1, -2, 0, 0, 0, 0]
+  # Elektriskt motstånd - spänning/ström (Ω)
+
+# Elektrisk konduktans
+- unit: conductance
+  dimension: [-2, 3, -1, 2, 0, 0, 0, 0]
+  # Elektrisk konduktans - 1/motstånd (S)
+
+# Magnetiskt flöde
+- unit: magnetic_flux
+  dimension: [2, -2, 1, -1, 0, 0, 0, 0]
+  # Magnetiskt flöde - spänning·tid (Wb)
+
+# Magnetisk flödestäthet
+- unit: magnetic_flux_density
+  dimension: [0, -2, 1, -1, 0, 0, 0, 0]
+  # Magnetisk flödestäthet - flöde/area (T)
+
+# Induktans
+- unit: inductance
+  dimension: [2, -2, 1, -2, 0, 0, 0, 0]
+  # Induktans - magnetiskt flöde/ström (H)
+
+# Ljusflöde
+- unit: luminous_flux
+  dimension: [0, 0, 0, 0, 0, 0, 1, 0]
+  # Ljusflöde - ljusstyrka·rymdvinkel (lm)
+
+# Belysningsstyrka
+- unit: illuminance
+  dimension: [-2, 0, 0, 0, 0, 0, 1, 0]
+  # Belysningsstyrka - ljusflöde/area (lx)
+
+# Radioaktivitet
+- unit: activity
+  dimension: [0, -1, 0, 0, 0, 0, 0, 0]
+  # Radioaktivitet - sönderfall/tid (Bq)
+
+# Absorberad dos
+- unit: absorbed_dose
+  dimension: [2, -2, 0, 0, 0, 0, 0, 0]
+  # Absorberad dos - energi/massa (Gy)
+
+# Dosekvivalent
+- unit: dose_equivalent
+  dimension: [2, -2, 0, 0, 0, 0, 0, 0]
+  # Dosekvivalent - biologiskt viktad absorberad dos (Sv)
+
+# Katalytisk aktivitet
+- unit: catalytic_activity
+  dimension: [0, -1, 0, 0, 0, 1, 0, 0]
+  # Katalytisk aktivitet - substansmängd/tid (kat)
+
+# TRÖGHETSMOMENT
+# Massans tröghetsmoment
+- unit: moment_of_inertia
+  dimension: [2, 0, 1, 0, 0, 0, 0, 0]
+  # Massans tröghetsmoment - massa·längd² (kg·m²)
+
+# Arealtröghetsmoment
+- unit: second_moment_of_area
+  dimension: [4, 0, 0, 0, 0, 0, 0, 0]
+  # Arealtröghetsmoment - längd⁴ (m⁴)
+
+# VINKELRELATERADE ENHETER
+# Vinkelhastighet
+- unit: angular_velocity
+  dimension: [0, -1, 0, 0, 0, 0, 0, 0]
+  # Vinkelhastighet - vinkel/tid (rad/s)
+
+# Vinkelacceleration
+- unit: angular_acceleration
+  dimension: [0, -2, 0, 0, 0, 0, 0, 0]
+  # Vinkelacceleration - vinkelhastighet/tid (rad/s²)
+
+# TERMODYNAMISKA ENHETER
+# Värmekapacitet
+- unit: heat_capacity
+  dimension: [2, -2, 1, 0, -1, 0, 0, 0]
+  # Värmekapacitet - energi/temperatur (J/K)
+
+# Specifik värmekapacitet
+- unit: specific_heat_capacity
+  dimension: [2, -2, 0, 0, -1, 0, 0, 0]
+  # Specifik värmekapacitet - energi/(massa·temperatur) (J/(kg·K))
+
+# Termisk konduktivitet
+- unit: thermal_conductivity
+  dimension: [1, -3, 1, 0, -1, 0, 0, 0]
+  # Termisk konduktivitet - effekt/(längd·temperatur) (W/(m·K))
+
+# FLÖDESRELATERADE ENHETER
+# Massflöde
+- unit: mass_flow
+  dimension: [0, -1, 1, 0, 0, 0, 0, 0]
+  # Massflöde - massa/tid (kg/s)
+
+# Volymflöde
+- unit: volume_flow
+  dimension: [3, -1, 0, 0, 0, 0, 0, 0]
+  # Volymflöde - volym/tid (m³/s)
+
+# DENSITET OCH KONCENTRATION
+- unit: density
+  dimension: [-3, 0, 1, 0, 0, 0, 0, 0]
+  # Densitet - massa/volym (kg/m³)
+
+- unit: concentration
+  dimension: [-3, 0, 0, 0, 0, 1, 0, 0]
+  # Koncentration - substansmängd/volym (mol/m³)
+
+# MEKANISKA EGENSKAPER
+# Elasticitetsmodul
+- unit: elastic_modulus
+  dimension: [-1, -2, 1, 0, 0, 0, 0, 0]
+  # Elasticitetsmodul - tryck (Pa)
+
+# Viskositet (dynamisk)
+- unit: dynamic_viscosity
+  dimension: [-1, -1, 1, 0, 0, 0, 0, 0]
+  # Dynamisk viskositet - kraft·tid/area (Pa·s)
+
+# Viskositet (kinematisk)
+- unit: kinematic_viscosity
+  dimension: [2, -1, 0, 0, 0, 0, 0, 0]
+  # Kinematisk viskositet - area/tid (m²/s)
+
+# ENHETER MED SYMBOLER - KONKRETA SI-ENHETER
+# Volym
+- unit: liter
+  dimension: [3, 0, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{L}
+  factor: 0.001
+  # Liter - 0.001 m³ eller 1 dm³
+
+# Hastighet
+- unit: mps
+  dimension: [1, -1, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{m/s}
+  factor: 1.0
+  # Meter per sekund - SI-enhet för hastighet
+
+- unit: kmh
+  dimension: [1, -1, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{km/h}
+  factor: 0.2777777777777778
+  # Kilometer per timme - vanlig hastighetsenhet (1 km/h = 0.278 m/s)
+
+# Frekvens
+- unit: Hz
+  dimension: [0, -1, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{Hz}
+  factor: 1.0
+  # Hertz - SI-enhet för frekvens (1/s)
+
+- unit: kHz
+  dimension: [0, -1, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{kHz}
+  factor: 1000.0
+  # Kilohertz - 1000 Hz
+
+- unit: MHz
+  dimension: [0, -1, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{MHz}
+  factor: 1000000.0
+  # Megahertz - 1000000 Hz
+
+- unit: GHz
+  dimension: [0, -1, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{GHz}
+  factor: 1000000000.0
+  # Gigahertz - 10^9 Hz
+
+# Kraft
+- unit: N
+  dimension: [1, -2, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{N}
+  factor: 1.0
+  # Newton - SI-enhet för kraft (kg·m/s²)
+
+- unit: kN
+  dimension: [1, -2, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{kN}
+  factor: 1000.0
+  # Kilonewton - 1000 N
+
+# Tryck
+- unit: Pa
+  dimension: [-1, -2, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{Pa}
+  factor: 1.0
+  # Pascal - SI-enhet för tryck (N/m²)
+
+- unit: kPa
+  dimension: [-1, -2, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{kPa}
+  factor: 1000.0
+  # Kilopascal - 1000 Pa
+
+- unit: MPa
+  dimension: [-1, -2, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{MPa}
+  factor: 1000000.0
+  # Megapascal - 10^6 Pa
+
+- unit: bar
+  dimension: [-1, -2, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{bar}
+  factor: 100000.0
+  # Bar - 10^5 Pa, vanlig tryckenhet
+
+# Energi
+- unit: J
+  dimension: [2, -2, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{J}
+  factor: 1.0
+  # Joule - SI-enhet för energi (N·m)
+
+- unit: kJ
+  dimension: [2, -2, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{kJ}
+  factor: 1000.0
+  # Kilojoule - 1000 J
+
+- unit: MJ
+  dimension: [2, -2, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{MJ}
+  factor: 1000000.0
+  # Megajoule - 10^6 J
+
+# Vridmoment (ortogonal till energi)
+- unit: Nm
+  dimension: [2, -2, 1, 0, 0, 0, 0, 1]
+  symbol: \mathrm{N \cdot m}
+  factor: 1.0
+  # Newton-meter - SI-enhet för vridmoment (ortogonal till energi)
+
+# Effekt
+- unit: W
+  dimension: [2, -3, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{W}
+  factor: 1.0
+  # Watt - SI-enhet för effekt (J/s)
+
+- unit: kW
+  dimension: [2, -3, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{kW}
+  factor: 1000.0
+  # Kilowatt - 1000 W
+
+- unit: MW
+  dimension: [2, -3, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{MW}
+  factor: 1000000.0
+  # Megawatt - 10^6 W
+
+- unit: GW
+  dimension: [2, -3, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{GW}
+  factor: 1000000000.0
+  # Gigawatt - 10^9 W
+
+# Reaktiv effekt
+- unit: VAr
+  dimension: [2, -3, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{VAr}
+  factor: 1.0
+  # Var - enhet för reaktiv effekt (lagrad som komplex värde)
+
+- unit: kVAr
+  dimension: [2, -3, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{kVAr}
+  factor: 1000.0
+  # Kilovar - 1000 VAr
+
+- unit: MVAr
+  dimension: [2, -3, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{MVAr}
+  factor: 1000000.0
+  # Megavar - 10^6 VAr
+
+# Elektrisk laddning
+- unit: C
+  dimension: [0, 1, 0, 1, 0, 0, 0, 0]
+  symbol: \mathrm{C}
+  factor: 1.0
+  # Coulomb - SI-enhet för elektrisk laddning (A·s)
+
+# Elektrisk spänning
+- unit: V
+  dimension: [2, -3, 1, -1, 0, 0, 0, 0]
+  symbol: \mathrm{V}
+  factor: 1.0
+  # Volt - SI-enhet för elektrisk spänning (W/A)
+
+- unit: mV
+  dimension: [2, -3, 1, -1, 0, 0, 0, 0]
+  symbol: \mathrm{mV}
+  factor: 0.001
+  # Millivolt - 1/1000 V
+
+- unit: kV
+  dimension: [2, -3, 1, -1, 0, 0, 0, 0]
+  symbol: \mathrm{kV}
+  factor: 1000.0
+  # Kilovolt - 1000 V
+
+- unit: MV
+  dimension: [2, -3, 1, -1, 0, 0, 0, 0]
+  symbol: \mathrm{MV}
+  factor: 1000000.0
+  # Megavolt - 10^6 V
+
+# Elektrisk ström
+- unit: mA
+  dimension: [0, 0, 0, 1, 0, 0, 0, 0]
+  symbol: \mathrm{mA}
+  factor: 0.001
+  # Milliampere - 1/1000 A
+
+- unit: uA
+  dimension: [0, 0, 0, 1, 0, 0, 0, 0]
+  symbol: \mathrm{\mu A}
+  factor: 0.000001
+  # Mikroampere - 10^-6 A
+
+- unit: kA
+  dimension: [0, 0, 0, 1, 0, 0, 0, 0]
+  symbol: \mathrm{kA}
+  factor: 1000.0
+  # Kiloampere - 1000 A
+
+# Elektrisk kapacitans
+- unit: F
+  dimension: [-2, 4, -1, 2, 0, 0, 0, 0]
+  symbol: \mathrm{F}
+  factor: 1.0
+  # Farad - SI-enhet för elektrisk kapacitans (C/V)
+
+- unit: uF
+  dimension: [-2, 4, -1, 2, 0, 0, 0, 0]
+  symbol: \mathrm{\mu F}
+  factor: 0.000001
+  # Mikrofarad - 10^-6 F
+
+- unit: nF
+  dimension: [-2, 4, -1, 2, 0, 0, 0, 0]
+  symbol: \mathrm{nF}
+  factor: 0.000000001
+  # Nanofarad - 10^-9 F
+
+- unit: pF
+  dimension: [-2, 4, -1, 2, 0, 0, 0, 0]
+  symbol: \mathrm{pF}
+  factor: 0.000000000001
+  # Pikofarad - 10^-12 F
+
+# Elektriskt motstånd
+- unit: ohm
+  dimension: [2, -3, 1, -2, 0, 0, 0, 0]
+  symbol: \mathrm{\Omega}
+  factor: 1.0
+  # Ohm - SI-enhet för elektriskt motstånd (V/A)
+
+- unit: kohm
+  dimension: [2, -3, 1, -2, 0, 0, 0, 0]
+  symbol: \mathrm{k\Omega}
+  factor: 1000.0
+  # Kiloohm - 1000 Ω
+
+- unit: Mohm
+  dimension: [2, -3, 1, -2, 0, 0, 0, 0]
+  symbol: \mathrm{M\Omega}
+  factor: 1000000.0
+  # Megaohm - 10^6 Ω
+
+# Elektrisk konduktans
+- unit: S
+  dimension: [-2, 3, -1, 2, 0, 0, 0, 0]
+  symbol: \mathrm{S}
+  factor: 1.0
+  # Siemens - SI-enhet för elektrisk konduktans (1/Ω)
+
+# Magnetiskt flöde
+- unit: Wb
+  dimension: [2, -2, 1, -1, 0, 0, 0, 0]
+  symbol: \mathrm{Wb}
+  factor: 1.0
+  # Weber - SI-enhet för magnetiskt flöde (V·s)
+
+# Magnetisk flödestäthet
+- unit: T
+  dimension: [0, -2, 1, -1, 0, 0, 0, 0]
+  symbol: \mathrm{T}
+  factor: 1.0
+  # Tesla - SI-enhet för magnetisk flödestäthet (Wb/m²)
+
+- unit: mT
+  dimension: [0, -2, 1, -1, 0, 0, 0, 0]
+  symbol: \mathrm{mT}
+  factor: 0.001
+  # Millitesla - 1/1000 T
+
+# Induktans
+- unit: H
+  dimension: [2, -2, 1, -2, 0, 0, 0, 0]
+  symbol: \mathrm{H}
+  factor: 1.0
+  # Henry - SI-enhet för induktans (Wb/A)
+
+- unit: mH
+  dimension: [2, -2, 1, -2, 0, 0, 0, 0]
+  symbol: \mathrm{mH}
+  factor: 0.001
+  # Millihenry - 1/1000 H
+
+- unit: uH
+  dimension: [2, -2, 1, -2, 0, 0, 0, 0]
+  symbol: \mathrm{\mu H}
+  factor: 0.000001
+  # Mikrohenry - 10^-6 H
+
+# Ljusflöde
+- unit: lm
+  dimension: [0, 0, 0, 0, 0, 0, 1, 0]
+  symbol: \mathrm{lm}
+  factor: 1.0
+  # Lumen - SI-enhet för ljusflöde (cd·sr)
+
+# Belysningsstyrka
+- unit: lx
+  dimension: [-2, 0, 0, 0, 0, 0, 1, 0]
+  symbol: \mathrm{lx}
+  factor: 1.0
+  # Lux - SI-enhet för belysningsstyrka (lm/m²)
+
+# Radioaktivitet
+- unit: Bq
+  dimension: [0, -1, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{Bq}
+  factor: 1.0
+  # Becquerel - SI-enhet för radioaktivitet (1/s)
+
+# Absorberad dos
+- unit: Gy
+  dimension: [2, -2, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{Gy}
+  factor: 1.0
+  # Gray - SI-enhet för absorberad dos (J/kg)
+
+# Dosekvivalent
+- unit: Sv
+  dimension: [2, -2, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{Sv}
+  factor: 1.0
+  # Sievert - SI-enhet för dosekvivalent (J/kg, biologiskt viktad)
+
+# Katalytisk aktivitet
+- unit: kat
+  dimension: [0, -1, 0, 0, 0, 1, 0, 0]
+  symbol: \mathrm{kat}
+  factor: 1.0
+  # Katal - SI-enhet för katalytisk aktivitet (mol/s)
+
+# Vinkelhastighet
+- unit: rps
+  dimension: [0, -1, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{rad/s}
+  factor: 1.0
+  # Radian per sekund - SI-enhet för vinkelhastighet
+
+- unit: rpm
+  dimension: [0, -1, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{rpm}
+  factor: 0.10471975511965977
+  # Varv per minut - vanlig enhet för vinkelhastighet (2π/60 rad/s)
+
+# SAMMANSATTA ENHETER MED SYMBOLER
+# Area
+- unit: m2
+  dimension: [2, 0, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{m^2}
+  factor: 1.0
+  # Kvadratmeter - SI-enhet för area
+
+- unit: cm2
+  dimension: [2, 0, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{cm^2}
+  factor: 0.0001
+  # Kvadratcentimeter - 1/10000 m²
+
+- unit: km2
+  dimension: [2, 0, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{km^2}
+  factor: 1000000.0
+  # Kvadratkilometer - 10^6 m²
+
+# Volym
+- unit: m3
+  dimension: [3, 0, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{m^3}
+  factor: 1.0
+  # Kubikmeter - SI-enhet för volym
+
+- unit: cm3
+  dimension: [3, 0, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{cm^3}
+  factor: 0.000001
+  # Kubikcentimeter - 10^-6 m³
+
+- unit: ml
+  dimension: [3, 0, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{ml}
+  factor: 0.000001
+  # Milliliter - 10^-6 m³ (samma som cm³)
+
+# Massans tröghetsmoment
+- unit: kgm2
+  dimension: [2, 0, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{kg \cdot m^2}
+  factor: 1.0
+  # Kilogram kvadratmeter - SI-enhet för tröghetsmoment
+
+# Arealtröghetsmoment
+- unit: m4
+  dimension: [4, 0, 0, 0, 0, 0, 0, 0]
+  symbol: \mathrm{m^4}
+  factor: 1.0
+  # Meter i fjärde - enhet för arealtröghetsmoment
+
+# Dynamisk viskositet
+- unit: Pas
+  dimension: [-1, -1, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{Pa \cdot s}
+  factor: 1.0
+  # Pascal-sekund - SI-enhet för dynamisk viskositet
+
+# Värmekapacitet
+- unit: JK
+  dimension: [2, -2, 1, 0, -1, 0, 0, 0]
+  symbol: \mathrm{J/K}
+  factor: 1.0
+  # Joule per kelvin - enhet för värmekapacitet
+
+# Specifik värmekapacitet
+- unit: JkgK
+  dimension: [2, -2, 0, 0, -1, 0, 0, 0]
+  symbol: \mathrm{J/(kg \cdot K)}
+  factor: 1.0
+  # Joule per kilogram-kelvin - enhet för specifik värmekapacitet
+
+# Termisk konduktivitet
+- unit: WmK
+  dimension: [1, -3, 1, 0, -1, 0, 0, 0]
+  symbol: \mathrm{W/(m \cdot K)}
+  factor: 1.0
+  # Watt per meter-kelvin - enhet för termisk konduktivitet
+
+# Densitet
+- unit: kgm3
+  dimension: [-3, 0, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{kg/m^3}
+  factor: 1.0
+  # Kilogram per kubikmeter - SI-enhet för densitet
+
+# Koncentration
+- unit: molm3
+  dimension: [-3, 0, 0, 0, 0, 1, 0, 0]
+  symbol: \mathrm{mol/m^3}
+  factor: 1.0
+  # Mol per kubikmeter - SI-enhet för molar koncentration
+
+# Energi/arbete i andra enheter
+- unit: Wh
+  dimension: [2, -2, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{Wh}
+  factor: 3600.0
+  # Wattimme - vanlig energienhet (3600 J)
+
+- unit: kWh
+  dimension: [2, -2, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{kWh}
+  factor: 3600000.0
+  # Kilowattimme - vanlig energienhet (3.6×10^6 J)
+
+- unit: MWh
+  dimension: [2, -2, 1, 0, 0, 0, 0, 0]
+  symbol: \mathrm{MWh}
+  factor: 3600000000.0
+  # Megawattimme - vanlig energienhet (3.6×10^9 J)
+
+# KONSTANTER
 - unit: pi
-  # Matematisk konstant pi
   dimension: [0, 0, 0, 0, 0, 0, 0, 0]
-  symbol: \\pi
-  factor: 3.14159265359
+  symbol: \pi
+  factor: 3.141592653589793
+  # Pi - matematisk konstant
 
-- unit: c
-  # Ljushastigheten i vakuum
+- unit: light_speed
   dimension: [1, -1, 0, 0, 0, 0, 0, 0]
   symbol: c
-  factor: 299792458
+  factor: 299792458.0
+  # Ljushastigheten i vakuum - 299792458 m/s
+
+- unit: gravitational_constant
+  dimension: [3, -2, -1, 0, 0, 0, 0, 0]
+  symbol: G
+  factor: 6.67430e-11
+  # Gravitationskonstanten - 6.67430×10^-11 m³/(kg·s²)
+
+- unit: planck_constant
+  dimension: [2, -1, 1, 0, 0, 0, 0, 0]
+  symbol: h
+  factor: 6.62607015e-34
+  # Plancks konstant - 6.62607015×10^-34 J·s
+
+- unit: reduced_planck_constant
+  dimension: [2, -1, 1, 0, 0, 0, 0, 0]
+  symbol: \hbar
+  factor: 1.054571817e-34
+  # Reducerade Plancks konstant - h/(2π) ≈ 1.054571817×10^-34 J·s
+
+- unit: boltzmann_constant
+  dimension: [2, -2, 1, 0, -1, 0, 0, 0]
+  symbol: k_B
+  factor: 1.380649e-23
+  # Boltzmanns konstant - 1.380649×10^-23 J/K
+
+- unit: elementary_charge
+  dimension: [0, 1, 0, 1, 0, 0, 0, 0]
+  symbol: e
+  factor: 1.602176634e-19
+  # Elementarladdningen - 1.602176634×10^-19 C
+
+- unit: avogadro_constant
+  dimension: [0, 0, 0, 0, 0, -1, 0, 0]
+  symbol: N_A
+  factor: 6.02214076e23
+  # Avogadros tal - 6.02214076×10^23 mol^-1
+
+- unit: vacuum_permittivity
+  dimension: [-3, 4, -1, 2, 0, 0, 0, 0]
+  symbol: \varepsilon_0
+  factor: 8.8541878128e-12
+  # Vakuumpermittivitet - 8.8541878128×10^-12 F/m
+
+- unit: vacuum_permeability
+  dimension: [1, -2, 1, -2, 0, 0, 0, 0]
+  symbol: \mu_0
+  factor: 1.25663706212e-6
+  # Vakuumpermeabilitet - 1.25663706212×10^-6 H/m
+
+- unit: electron_mass
+  dimension: [0, 0, 1, 0, 0, 0, 0, 0]
+  symbol: m_e
+  factor: 9.1093837015e-31
+  # Elektronens massa - 9.1093837015×10^-31 kg
+
+- unit: proton_mass
+  dimension: [0, 0, 1, 0, 0, 0, 0, 0]
+  symbol: m_p
+  factor: 1.67262192369e-27
+  # Protonens massa - 1.67262192369×10^-27 kg
+
+- unit: neutron_mass
+  dimension: [0, 0, 1, 0, 0, 0, 0, 0]
+  symbol: m_n
+  factor: 1.67492749804e-27
+  # Neutronens massa - 1.67492749804×10^-27 kg
+
+- unit: standard_gravity
+  dimension: [1, -2, 0, 0, 0, 0, 0, 0]
+  symbol: g
+  factor: 9.80665
+  # Standard tyngdacceleration - 9.80665 m/s²
