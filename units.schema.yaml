@@ -1,0 +1,26 @@
+# Schema för ValueWithUnits enhetsregister
+type: array
+items:
+  type: object
+  required:
+    - unit
+    - dimension
+  properties:
+    unit:
+      type: string
+    dimension:
+      type: array
+      items:
+        type: integer
+        minimum: -128
+        maximum: 127
+      minItems: 8
+      maxItems: 8
+    symbol:
+      type: string
+    factor:
+      type: number
+      exclusiveMinimum: 0
+  dependencies:
+    symbol: [factor]
+    factor: [symbol]

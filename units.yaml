@@ -1,0 +1,19 @@
+# Enheter för ValueWithUnits-systemet
+- unit: meter
+  # Basenhet för längd i SI-systemet
+  dimension: [1, 0, 0, 0, 0, 0, 0, 0]
+  symbol: \\mathrm{m}
+  factor: 1
+
+# Konstanter
+- unit: pi
+  # Matematisk konstant pi
+  dimension: [0, 0, 0, 0, 0, 0, 0, 0]
+  symbol: \\pi
+  factor: 3.14159265359
+
+- unit: c
+  # Ljushastigheten i vakuum
+  dimension: [1, -1, 0, 0, 0, 0, 0, 0]
+  symbol: c
+  factor: 299792458
