@@ -93,7 +93,7 @@
 - unit: year
   dimension: [0, 1, 0, 0, 0, 0, 0, 0]
   symbol: \mathrm{år}
-  factor: 31536000.0
+  factor: 31556925.2
   # År - 365 dagar eller 31536000 sekunder
 
 # Massenheter
