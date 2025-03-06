@@ -1,5 +1,3 @@
-Jag kan skapa en uppdaterad roadmap som inkluderar dessa förändringar. Här är en reviderad version av roadmapen:
-
 ## Reviderad Roadmap för ValueWithUnits v2 Implementation
 
 ### Fas 1: Förberedelser och filstruktur
