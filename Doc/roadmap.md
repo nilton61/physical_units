@@ -82,7 +82,7 @@
   - Vektorkalkyl, komplexa operationer, etc.
   - Tester för avancerade beräkningar
 
-## Fas 8: Dokumentation och användbarhet
+## Fas 8: Dokumentation och användbarhet    
 1. **Dokumentera API**
   - Skriva grundlig API-dokumentation
   - Exempel på användning
