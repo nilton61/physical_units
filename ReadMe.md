@@ -1,87 +1,93 @@
-# **ValueWithUnits**
+# ValueWithUnits
 
-A Rust library for robust handling of physical quantities with units, dimensions, and orthogonality.
+A Rust library for robust handling of physical quantities with units, designed with a clear separation of concerns.
 
-## **Overview**
+## Design Philosophy
 
-ValueWithUnits implements a powerful system for handling physical values with associated units, ensuring dimensional correctness in calculations. The library is designed to be both easy to use and flexible enough for advanced physical calculations.
+ValueWithUnits is built around three core principles:
 
-Key features:
+1. **Separation of concerns**: Clear distinction between creation, calculation, and presentation
+2. **Dimensional integrity**: All calculations maintain dimensional correctness
+3. **Flexibility**: Support for multiple unit systems and presentation formats
 
-* Complete dimensional analysis with 8-dimensional vector representation  
-* Complex value representation for handling phase relationships  
-* Orthogonality handling to distinguish physically different quantities with the same dimension  
-* Flexible unit management via a database-backed registry system  
-* Intuitive API for mathematical operations with automatic unit conversion
+## Core Components
 
-## **V2 Unit Registry**
+The library is organized into three main functional areas:
 
-Version 2 introduces a unit registry that separates unit data from code:
+### 1. Value Creation
 
-* JSON-driven unit management  
-* Standard units for each dimension combination  
-* Bidirectional lookup (dimension vector → units, symbol → unit)  
-* Preservation of user-specified units
+The creation subsystem provides:
+- Constants for all standard units and dimensions
+- Intuitive syntax for creating values with proper dimensions
+- Support for multiple unit systems (SI, Imperial, etc.)
+- Easy access to common physical constants
 
-## **Installation**
+// Examples of value creation
+let length = 5.0 * METER;
+let time = 10.0 * SECOND;
+let mass = 2.5 * KILOGRAM;
 
-Add the following to your Cargo.toml:
+### 2. Calculation Engine
 
-\[dependencies\]  
-physical\_units \= "0.2.0"
+The calculation engine focuses on:
+- Maintaining dimensional correctness in all operations
+- Efficient representation of physical quantities
+- Support for complex values and orthogonality
+- Comprehensive error handling
 
-## **Usage**
+// Examples of calculations
+let velocity = length / time;
+let kinetic_energy = 0.5 * mass * velocity * velocity;
 
-// Initialize the unit registry  
-physical\_units::initialize("path/to/units.json")?;
+### 3. Presentation System
 
-// Create values with units  
-let length \= 5.0 \* METER;  
-let time \= 2.0 \* SECOND;  
-let speed \= length / time;  // Result in m/s
+The presentation system handles:
+- Converting values to appropriate units for display
+- Formatting with proper precision and unit symbols
+- Support for various output formats (plain text, LaTeX, etc.)
+- Automatic selection of appropriate unit prefixes
 
-// Conversion between units  
-let speed\_kph \= speed.to\_unit("km/h");  
-println\!("Speed: {}", speed\_kph);  // Displays "Speed: 9 km/h"
+// Examples of presentation
+println!("{}", velocity.to_string()); // "0.5 m/s"
+println!("{}", velocity.format_with(KMH)); // "1.8 km/h"
+println!("{}", kinetic_energy.best_prefix()); // "312.5 mJ"
 
-// Complex values and orthogonality  
-let active\_power \= 100.0 \* WATT;  
-let reactive\_power \= 50.0 \* VAR;  
-let apparent\_power \= active\_power \+ reactive\_power;  // Complex power
+## Installation
 
-## **Design Principles**
+Add this to your `Cargo.toml`:
 
-ValueWithUnits is built on the following principles:
+[dependencies]
+physical_units = "0.2.0"
 
-1. **Value Integrity**: Values always maintain dimensional integrity and are stored internally in SI units  
-2. **User Preference**: User-specified units are preserved when possible through compatible operations  
-3. **Complexity Where Needed**: Complex values are used only where meaningful (e.g., AC circuits)  
-4. **Data-Driven Configuration**: The unit registry can be customized via external JSON configuration
+## Basic Usage
 
-## **Advanced Concepts**
+use physical_units::prelude::*;
 
-### **Dimension Vector**
+fn main() {
+    // Create values
+    let distance = 100.0 * METER;
+    let time = 9.8 * SECOND;
+    
+    // Perform calculations
+    let velocity = distance / time;
+    
+    // Present results in different forms
+    println!("Velocity: {}", velocity); // SI units with automatic prefix
+    println!("Velocity: {}", velocity.format_with(KMH)); // Specific unit
+    println!("Velocity: {}", velocity.to_system(IMPERIAL)); // Different system
+}
 
-The vector `[i8; 8]` represents exponents for the fundamental dimensions:
+## Advanced Features
 
-1. Length (L) \- meter (m)  
-2. Time (T) \- second (s)  
-3. Mass (M) \- kilogram (kg)  
-4. Electric current (I) \- ampere (A)  
-5. Temperature (K) \- kelvin (K)  
-6. Amount of substance (N) \- mole (mol)  
-7. Luminous intensity (J) \- candela (cd)  
-8. Orthogonality (O) \- Represents orthogonality between quantities
+- **Orthogonality handling**: Distinguish between physically different quantities with the same dimensions
+- **Complex value support**: For quantities with phase relationships
+- **Unit registry**: Extensible database of units and conversion factors
+- **Custom formatting**: Define your own output formats and styles
 
-### **Orthogonality**
+## Contributing
 
-The orthogonality concept allows the library to distinguish between quantities that have the same dimensions but different physical meanings, such as energy (J) and torque (Nm), by combining dimension vector and complex representation.
+Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
-## **License**
+## License
 
 This project is licensed under the GNU General Public License v3 (GPL-3.0).
-
-## **Contributing**
-
-Contributions are welcome\! See CONTRIBUTING.md for details on how to contribute to the project.
-
