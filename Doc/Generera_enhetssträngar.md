@@ -34,7 +34,7 @@ Funktion HittaBestFit(dimensionsvektor, enhetssystem):
        e. Om ingen matchning hittas, upprepa från steg 3a
        f. När en matchning hittas, kombinera resultatenheten med grundenheten som 
           motsvarar skillnaden mellan originalvektorn och den matchade vektorn
-```
+
 
           ### Exempel
 
