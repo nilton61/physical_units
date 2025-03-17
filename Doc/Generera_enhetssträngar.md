@@ -22,7 +22,7 @@ Denna separation ger flera fördelar:
 
 När ingen exakt matchning för en dimensionsvektor hittas i ett specifikt enhetssystem, används följande algoritm:
 
-```
+```pseudocode
 Funktion HittaBestFit(dimensionsvektor, enhetssystem):
     1. Sök efter exakt matchning i enhetssystemet
     2. Om matchning hittas, returnera enhetssymbolen
@@ -36,13 +36,14 @@ Funktion HittaBestFit(dimensionsvektor, enhetssystem):
           motsvarar skillnaden mellan originalvektorn och den matchade vektorn
 ```
 
-          ### Exempel
+### Exempel
 
 Om dimensionsvektorn [2, -3, 1, 0, 0, 0, 0, 0] (t.ex. W) inte finns i ett visst enhetssystem:
 
 1. Identifiera högsta absolutbeloppet: -3 i position 1 (tid)
 2. Modifiera till: [2, -2, 1, 0, 0, 0, 0, 0] (t.ex. J/s)
 3. Om detta hittas, kombinera med tidsenhet för att återskapa original: J/s²
+
 
 ## Implementationsstruktur
 
@@ -63,6 +64,7 @@ struct DimensionUnit {
     unit_id: String,  // Identifierare för enheten
     priority: u8,     // Prioritet (för att välja bland flera alternativ)
 }
+```
 
 ## Designöverväganden
 
