@@ -33,7 +33,8 @@ Funktion HittaBestFit(dimensionsvektor, enhetssystem):
        d. Sök efter den modifierade vektorn
        e. Om ingen matchning hittas, upprepa från steg 3a
        f. När en matchning hittas, kombinera resultatenheten med grundenheten som 
-          motsvarar skillnaden mellan originalvektorn och den matchade vektorn```
+          motsvarar skillnaden mellan originalvektorn och den matchade vektorn
+```
 
           ### Exempel
 
