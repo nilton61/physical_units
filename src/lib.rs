@@ -131,31 +131,15 @@ pub enum Quantity {
 pub const LENGTH: DimensionVector = [1, 0, 0, 0, 0, 0, 0, 0];
 pub const TIME: DimensionVector = [0, 1, 0, 0, 0, 0, 0, 0];
 pub const MASS: DimensionVector = [0, 0, 1, 0, 0, 0, 0, 0];
-pub const CURRENT: DimensionVector = [0, 0, 0, 1, 0, 0, 0, 0];
-pub const TEMPERATURE: DimensionVector = [0, 0, 0, 0, 1, 0, 0, 0];
-pub const SUBSTANCE: DimensionVector = [0, 0, 0, 0, 0, 1, 0, 0];
-pub const LUMINOUS: DimensionVector = [0, 0, 0, 0, 0, 0, 1, 0];
-pub const VELOCITY: DimensionVector = [1, -1, 0, 0, 0, 0, 0, 0];
-pub const FORCE: DimensionVector = [1, -2, 1, 0, 0, 0, 0, 0];
-pub const ENERGY: DimensionVector = [2, -2, 1, 0, 0, 0, 0, 0];
-pub const POWER: DimensionVector = [2, -3, 1, 0, 0, 0, 0, 0];
-pub const TORQUE: DimensionVector = [2, -2, 1, 0, 0, 0, 0, 1];
+include!("dim_const.rs");
 
 // Lazy initialiserad primärtabell
-static DIMENSION_TO_UNIT: Lazy<HashMap<DimensionVector, Quantity>> = Lazy::new(|| {
+static PRIMETABLE: Lazy<HashMap<DimensionVector, Quantity>> = Lazy::new(|| {
     let mut map = HashMap::new();
     map.insert(LENGTH, Quantity::Length);
     map.insert(TIME, Quantity::Time);
     map.insert(MASS, Quantity::Mass);
-    map.insert(CURRENT, Quantity::Current);
-    map.insert(TEMPERATURE, Quantity::Temperature);
-    map.insert(SUBSTANCE, Quantity::AmountOfSubstance);
-    map.insert(LUMINOUS, Quantity::LuminousIntensity);
-    map.insert(VELOCITY, Quantity::Velocity);
-    map.insert(FORCE, Quantity::Force);
-    map.insert(ENERGY, Quantity::Energy);
-    map.insert(POWER, Quantity::Power);
-    map.insert(TORQUE, Quantity::Torque);
+    include!("primetable_inserts.rs");
     map
 });
 
@@ -163,17 +147,7 @@ static DIMENSION_TO_UNIT: Lazy<HashMap<DimensionVector, Quantity>> = Lazy::new(|
 pub const METER: ValueWithUnit = ValueWithUnit::new(1.0, LENGTH);
 pub const SECOND: ValueWithUnit = ValueWithUnit::new(1.0, TIME);
 pub const KILOGRAM: ValueWithUnit = ValueWithUnit::new(1.0, MASS);
-pub const AMPERE: ValueWithUnit = ValueWithUnit::new(1.0, CURRENT);
-pub const KELVIN: ValueWithUnit = ValueWithUnit::new(1.0, TEMPERATURE);
-pub const MOLE: ValueWithUnit = ValueWithUnit::new(1.0, SUBSTANCE);
-pub const CANDELA: ValueWithUnit = ValueWithUnit::new(1.0, LUMINOUS);
-
-// Härledda enheter
-pub const METER_PER_SECOND: ValueWithUnit = ValueWithUnit::new(1.0, VELOCITY);
-pub const NEWTON: ValueWithUnit = ValueWithUnit::new(1.0, FORCE);
-pub const JOULE: ValueWithUnit = ValueWithUnit::new(1.0, ENERGY);
-pub const WATT: ValueWithUnit = ValueWithUnit::new(1.0, POWER);
-pub const NEWTON_METER: ValueWithUnit = ValueWithUnit::new(1.0, TORQUE);
+include!("unit_const.rs");
 
 
 // Sekundärtabell SI-enheter (exempelvis i en si.rs-fil eller i lib.rs)
@@ -184,18 +158,7 @@ static SI_SYMBOLS: Lazy<HashMap<Quantity, &'static str>> = Lazy::new(|| {
     map.insert(Quantity::Length, "m");
     map.insert(Quantity::Time, "s");
     map.insert(Quantity::Mass, "kg");
-    map.insert(Quantity::Current, "A");
-    map.insert(Quantity::Temperature, "K");
-    map.insert(Quantity::AmountOfSubstance, "mol");
-    map.insert(Quantity::LuminousIntensity, "cd");
-    
-    // Härledda enheter
-    map.insert(Quantity::Velocity, "m/s");
-    map.insert(Quantity::Force, "N");
-    map.insert(Quantity::Energy, "J");
-    map.insert(Quantity::Power, "W");
-    map.insert(Quantity::Torque, "N·m");
-    
+    include!("secondary_inserts.rs");    
     map
 });
 

@@ -1,0 +1,9 @@
+pub const CURRENT: DimensionVector = [0, 0, 0, 1, 0, 0, 0, 0];
+pub const TEMPERATURE: DimensionVector = [0, 0, 0, 0, 1, 0, 0, 0];
+pub const SUBSTANCE: DimensionVector = [0, 0, 0, 0, 0, 1, 0, 0];
+pub const LUMINOUS: DimensionVector = [0, 0, 0, 0, 0, 0, 1, 0];
+pub const VELOCITY: DimensionVector = [1, -1, 0, 0, 0, 0, 0, 0];
+pub const FORCE: DimensionVector = [1, -2, 1, 0, 0, 0, 0, 0];
+pub const ENERGY: DimensionVector = [2, -2, 1, 0, 0, 0, 0, 0];
+pub const POWER: DimensionVector = [2, -3, 1, 0, 0, 0, 0, 0];
+pub const TORQUE: DimensionVector = [2, -2, 1, 0, 0, 0, 0, 1];
