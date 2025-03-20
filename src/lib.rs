@@ -1,7 +1,13 @@
 use num_complex::Complex;
-use std::fmt;
+
 pub mod error;
 pub use error::QuantityError;
+
+pub mod display;
+pub use display::*;
+
+use std::collections::HashMap;
+use once_cell::sync::Lazy;
 
 pub type DimensionVector = [i8; 8];
 
@@ -33,22 +39,6 @@ impl ValueWithUnit {
     }
 }
 
-
-// Implementera Display för ValueWithUnit
-// Detta hanterar endast debugging och default-visning
-// Den riktiga presentationen kommer hanteras separat
-impl fmt::Display for ValueWithUnit {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        // Enkel implementation som visar värdet och dimensionsvektorn
-        write!(f, "Value: {} + {}i, Dimension: {:?}", 
-               self.value.re, self.value.im, self.dimension)
-    }
-}
-
-
-
-use std::collections::HashMap;
-use once_cell::sync::Lazy;
 
 // Definiera enhetstyper enum
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
