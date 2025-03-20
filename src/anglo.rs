@@ -1,5 +1,5 @@
 // Sekundärtabell Anglo-enheter (exempelvis i en anglo.rs-fil)
-static ANGLO_SYMBOLS: Lazy<HashMap<Quantity, &'static str>> = Lazy::new(|| {
+pub static ANGLO_SYMBOLS: Lazy<HashMap<Quantity, &'static str>> = Lazy::new(|| {
     let mut map = HashMap::new();
     
     // Grundenheter
