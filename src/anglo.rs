@@ -1,3 +1,7 @@
+use std::collections::HashMap;
+use once_cell::sync::Lazy;
+use crate::Quantity;
+
 // Sekundärtabell Anglo-enheter (exempelvis i en anglo.rs-fil)
 pub static ANGLO_SYMBOLS: Lazy<HashMap<Quantity, &'static str>> = Lazy::new(|| {
     let mut map = HashMap::new();

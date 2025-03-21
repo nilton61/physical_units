@@ -1,4 +1,6 @@
 use num_complex::Complex;
+use std::collections::HashMap;
+use once_cell::sync::Lazy;
 
 pub mod error;
 pub use error::QuantityError;
@@ -6,8 +8,9 @@ pub use error::QuantityError;
 pub mod display;
 pub use display::*;
 
-use std::collections::HashMap;
-use once_cell::sync::Lazy;
+pub mod anglo;
+pub use anglo::ANGLO_SYMBOLS;
+
 
 pub type DimensionVector = [i8; 8];
 
@@ -92,28 +95,7 @@ static SI_SYMBOLS: Lazy<HashMap<Quantity, &'static str>> = Lazy::new(|| {
     map
 });
 
-// Sekundärtabell Anglo-enheter (exempelvis i en anglo.rs-fil)
-static ANGLO_SYMBOLS: Lazy<HashMap<Quantity, &'static str>> = Lazy::new(|| {
-    let mut map = HashMap::new();
-    
-    // Grundenheter
-    map.insert(Quantity::Length, "ft");
-    map.insert(Quantity::Time, "s");  // Samma som SI
-    map.insert(Quantity::Mass, "lb");
-    map.insert(Quantity::Current, "A");  // Samma som SI
-    map.insert(Quantity::Temperature, "°F");
-    map.insert(Quantity::AmountOfSubstance, "mol");  // Samma som SI
-    map.insert(Quantity::LuminousIntensity, "cd");  // Samma som SI
-    
-    // Härledda enheter
-    map.insert(Quantity::Velocity, "ft/s");
-    map.insert(Quantity::Force, "lbf");
-    map.insert(Quantity::Energy, "ft·lbf");
-    map.insert(Quantity::Power, "hp");
-    map.insert(Quantity::Torque, "ft·lbf");
-    
-    map
-});
+
 
 // Hjälpfunktioner för att hämta symboler
 pub fn get_si_symbol(unit_type: Quantity) -> Option<&'static str> {
@@ -136,3 +118,5 @@ pub fn get_symbol(unit_type: Quantity, system: UnitSystem) -> Option<&'static st
         UnitSystem::Anglo => get_anglo_symbol(unit_type),
     }
 }
+
+#[cfg(test)] mod test_tables;
