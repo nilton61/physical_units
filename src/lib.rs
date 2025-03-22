@@ -12,7 +12,96 @@ pub mod anglo;
 pub use anglo::ANGLO_SYMBOLS;
 
 
-pub type DimensionVector = [i8; 8];
+
+// Ändra från typalias till en struct med inre array
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+pub struct DimensionVector(pub [i8; 8]);
+
+// Implementera Deref för att behålla array-liknande beteende
+use std::ops::{Deref, DerefMut};
+
+impl Deref for DimensionVector {
+    type Target = [i8; 8];
+    
+    fn deref(&self) -> &Self::Target {
+        &self.0  // Returnera referens till den inre arrayen
+    } //fn deref
+} //impl Deref
+
+impl DerefMut for DimensionVector {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.0  // Returnera muterbar referens till den inre arrayen
+    } //fn deref_mut
+} //impl DerefMut
+
+// För att tillåta enkel skapande från array
+impl From<[i8; 8]> for DimensionVector {
+    fn from(array: [i8; 8]) -> Self {
+        DimensionVector(array)  // Omslut arrayen i DimensionVector-strukturen
+    } //fn from
+} //impl From
+
+// Metoder för DimensionVector
+impl DimensionVector {
+    // Konvertera tillbaka till en vanlig array
+    pub fn to_array(self) -> [i8; 8] {
+        self.0  // Returnera den inre arrayen
+    } //fn to_array
+} //impl DimensionVector
+
+// Implementera Add för DimensionVector
+impl std::ops::Add for DimensionVector {
+    type Output = Result<DimensionVector, QuantityError>;
+
+    fn add(self, other: Self) -> Self::Output {
+        let mut result = [0; 8];  // Resultatarray för summan
+        
+        for i in 0..8 {  // Iterera genom varje dimensionskomponent
+            // Beräkna summan som i16 för att fånga potentiella överflöden
+            let sum = self[i] as i16 + other[i] as i16;
+           
+            // Kontrollera om summan överstiger i8:s gränser
+            if sum > i8::MAX as i16 || sum < i8::MIN as i16 {  // Overflow-kontroll
+                return Err(QuantityError::DimensionOverflow {
+                    dimension_index: i,
+                    attempted_value: sum,
+                    message: format!("Dimension overflow: exponent {} for index {} exceeds limits", sum, i)
+                });  // Returnera fel vid overflow
+            }  // if overflow-kontroll
+           
+            result[i] = sum as i8;  // Tilldela summan till resultatarrayen
+        }  // for varje dimensionskomponent
+        
+        Ok(DimensionVector(result))  // Returnera framgångsresultat
+    }  // fn add
+}  // impl Add
+
+// Implementera Sub för DimensionVector
+impl std::ops::Sub for DimensionVector {
+    type Output = Result<DimensionVector, QuantityError>;
+
+    fn sub(self, other: Self) -> Self::Output {
+        let mut result = [0; 8];  // Resultatarray för differensen
+        
+        for i in 0..8 {  // Iterera genom varje dimensionskomponent
+            // Beräkna differensen som i16 för att fånga potentiella överflöden
+            let diff = self[i] as i16 - other[i] as i16;
+           
+            // Kontrollera om differensen överstiger i8:s gränser
+            if diff > i8::MAX as i16 || diff < i8::MIN as i16 {  // Overflow-kontroll
+                return Err(QuantityError::DimensionOverflow {
+                    dimension_index: i,
+                    attempted_value: diff,
+                    message: format!("Dimension overflow: exponent {} for index {} exceeds limits", diff, i)
+                });  // Returnera fel vid overflow
+            }  // if overflow-kontroll
+           
+            result[i] = diff as i8;  // Tilldela differensen till resultatarrayen
+        }  // for varje dimensionskomponent
+        
+        Ok(DimensionVector(result))  // Returnera framgångsresultat
+    }  // fn sub
+}  // impl Sub
 
 // ValueWithUnit struktur
 // Representerar ett fysiskt värde med dimensioner, utan presentation
@@ -61,9 +150,9 @@ pub enum Quantity {
 }
 
 // Definiera konstanta dimensionsvektorer
-pub const LENGTH: DimensionVector = [1, 0, 0, 0, 0, 0, 0, 0];
-pub const TIME: DimensionVector = [0, 1, 0, 0, 0, 0, 0, 0];
-pub const MASS: DimensionVector = [0, 0, 1, 0, 0, 0, 0, 0];
+pub const LENGTH: DimensionVector = DimensionVector([1, 0, 0, 0, 0, 0, 0, 0]);
+pub const TIME: DimensionVector = DimensionVector([0, 1, 0, 0, 0, 0, 0, 0]);
+pub const MASS: DimensionVector = DimensionVector([0, 0, 1, 0, 0, 0, 0, 0]);
 include!("dim_const.rs");
 
 // Lazy initialiserad primärtabell
@@ -120,3 +209,4 @@ pub fn get_symbol(unit_type: Quantity, system: UnitSystem) -> Option<&'static st
 }
 
 #[cfg(test)] mod test_tables;
+#[cfg(test)] mod dimension_tests;
