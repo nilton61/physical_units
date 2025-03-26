@@ -135,6 +135,7 @@ impl ValueWithUnit {
 // Definiera enhetstyper enum
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum Quantity {
+    // Grundläggande SI-storheter
     Length,
     Time,
     Mass,
@@ -142,11 +143,54 @@ pub enum Quantity {
     Temperature,
     AmountOfSubstance,
     LuminousIntensity,
+    
+    // Härledda storheter med unika dimensioner
     Velocity,
+    Acceleration,
     Force,
-    Energy,
+    Energy, // Inkluderar arbete och värme (samma dimension)
     Power,
-    Torque,
+    Torque, // Särskild ortogonalitet för att skilja från energi
+    Area,
+    Volume,
+    Frequency, // Inkluderar vinkelfrekvens (samma dimension)
+    Pressure, // Inkluderar mekanisk spänning (samma dimension)
+    Density,
+    ElectricPotential,
+    ElectricResistance,
+    ElectricCapacitance,
+    ElectricConductance,
+    Inductance,
+    MagneticFlux,
+    MagneticFluxDensity,
+    SpecificHeatCapacity,
+    HeatCapacity, // Samma dimension som entropi men olika koncept
+    Entropy,
+    ThermalConductivity,
+    DynamicViscosity,
+    KinematicViscosity, // Samma dimension som diffusion
+    SurfaceTension,
+    RadiantIntensity, // Olika från strålningsflöde
+    MassFlow,
+    MolarMass,
+    MolarVolume,
+    MolarEnergy,
+    Illuminance,
+    Luminance,
+    SoundIntensity,
+    AcousticImpedance,
+    WaveNumber,
+    Radioactivity,
+    AbsorbedDose,
+    CatalyticActivity,
+    Concentration,
+    Permeability,
+    Permittivity,
+    HeatTransferCoefficient,
+    ElasticityModulus, // Inkluderar alla elasticitetsmoduler (samma dimension som tryck)
+    Angle, // Dimensionslös men viktigt begrepp
+    Jerk,
+    SpecificGasVolume,
 }
 
 // Definiera konstanta dimensionsvektorer
@@ -210,3 +254,4 @@ pub fn get_symbol(unit_type: Quantity, system: UnitSystem) -> Option<&'static st
 
 #[cfg(test)] mod test_tables;
 #[cfg(test)] mod dimension_tests;
+#[cfg(test)] mod dimension_mappings_test;
